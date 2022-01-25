@@ -25,7 +25,14 @@ const ProposalForm = () => {
       }}
       validate={validate}
     >
-      {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+      }) => (
         <form onSubmit={handleSubmit}>
           <TextField
             label="Proposal title"
@@ -34,7 +41,7 @@ const ProposalForm = () => {
             placeholder=""
             value={values.title}
           />
-          {errors.title ? (
+          {errors.title && touched.title ? (
             <FormError errorText={errors.title}>{errors.title}</FormError>
           ) : null}
           <TextArea
@@ -44,7 +51,7 @@ const ProposalForm = () => {
             placeholder=""
             value={values.summary}
           />
-          {errors.summary ? (
+          {errors.summary && touched.summary ? (
             <FormError errorText={errors.summary}>{errors.summary}</FormError>
           ) : null}
           <Dropdown
@@ -55,17 +62,17 @@ const ProposalForm = () => {
             options={NETWORKS}
             value={values.network}
           />
-          {errors.network ? (
+          {errors.network && touched.network ? (
             <FormError errorText={errors.network}>{errors.network}</FormError>
           ) : null}
           <TextField
-            label="Price per episode"
+            label="Price per episode (Currency in GBP)"
             name="price"
             onChange={handleChange}
             value={values.price}
             type="number"
           />
-          {errors.price ? (
+          {errors.price && touched.price ? (
             <FormError errorText={errors.price}>{errors.price}</FormError>
           ) : null}
           {isSubmitting ? (
